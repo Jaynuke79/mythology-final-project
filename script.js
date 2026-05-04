@@ -61,3 +61,37 @@ document.addEventListener('keydown', (e) => {
 
 // Export openModal so realm content scripts can call it.
 window.openModal = openModal;
+
+// ── Story cards ──────────────────────────────────────
+function wireStoryCards(root) {
+  (root || document).querySelectorAll('.story-card').forEach((card) => {
+    if (card.dataset.wired) return;
+    card.dataset.wired = '1';
+
+    const img = card.querySelector('img');
+    const title = card.dataset.title || '';
+    const story = card.dataset.story || '';
+
+    if (img && title && !card.querySelector('.story-card__caption')) {
+      const caption = document.createElement('span');
+      caption.className = 'story-card__caption';
+      caption.textContent = title;
+      card.appendChild(caption);
+    }
+
+    card.addEventListener('click', () => {
+      const imgSrc = img ? img.src : '';
+      const imgAlt = img ? img.alt : title;
+      openModal(`
+        ${imgSrc ? `<img class="story-modal__img" src="${imgSrc}" alt="${imgAlt}">` : ''}
+        ${title ? `<h3 class="story-modal__title">${title}</h3>` : ''}
+        ${story ? `<p class="story-modal__body">${story}</p>` : ''}
+      `);
+    });
+  });
+}
+
+wireStoryCards();
+
+// Re-wire any cards added dynamically after page load.
+window.wireStoryCards = wireStoryCards;

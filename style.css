@@ -76,6 +76,20 @@ body {
 /* ── Main trunk ───────────────────────────────────── */
 #trunk {
   margin-left: var(--nav-width);
+  position: relative;
+}
+
+/* Yggdrasil tree spanning the full scroll height */
+.trunk__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ── Realm sections ───────────────────────────────── */
@@ -87,10 +101,11 @@ body {
   padding: 4rem 5vw;
   border-bottom: 1px solid #1a1a2e;
   position: relative;
+  z-index: 1;
 }
 
 .realm--light {
-  background: linear-gradient(160deg, #0f0f1e 0%, #0a0a14 100%);
+  background: linear-gradient(160deg, rgba(15,15,30,0.82) 0%, rgba(10,10,20,0.82) 100%);
 }
 
 .realm--light .realm__content h2 {
@@ -99,19 +114,19 @@ body {
 
 /* Jotunheim */
 #jotunheim {
-  background: linear-gradient(160deg, #0a1408 0%, #0a0a14 100%);
+  background: linear-gradient(160deg, rgba(10,20,8,0.82) 0%, rgba(10,10,20,0.82) 100%);
 }
 #jotunheim .realm__content h2 { color: var(--color-accent-earth); }
 
 /* Niflheim */
 #niflheim {
-  background: linear-gradient(160deg, #080e14 0%, #04080f 100%);
+  background: linear-gradient(160deg, rgba(8,14,20,0.82) 0%, rgba(4,8,15,0.82) 100%);
 }
 #niflheim .realm__content h2 { color: var(--color-accent-cold); }
 
 /* Muspelheim */
 #muspelheim {
-  background: linear-gradient(160deg, #180800 0%, #0a0a14 100%);
+  background: linear-gradient(160deg, rgba(24,8,0,0.82) 0%, rgba(10,10,20,0.82) 100%);
 }
 #muspelheim .realm__content h2 { color: var(--color-accent-fire); }
 
@@ -197,6 +212,71 @@ body {
 .realm__content.visible {
   opacity: 1;
   transform: none;
+}
+
+/* ── Story cards ──────────────────────────────────── */
+.story-card {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid #2a2a40;
+  max-width: 280px;
+}
+
+.story-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.story-card:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.75);
+}
+
+.story-card__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+}
+
+.story-card:hover .story-card__caption {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Story card modal content ─────────────────────── */
+.story-modal__img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.story-modal__title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-text);
+}
+
+.story-modal__body {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-text);
 }
 
 /* ── Responsive ───────────────────────────────────── */
