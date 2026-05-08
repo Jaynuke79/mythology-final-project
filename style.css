@@ -15,7 +15,7 @@
   --color-accent-light: #9a8a5a;  /* upper realms */
   --font-heading: Georgia, 'Times New Roman', serif;
   --font-body: system-ui, sans-serif;
-  --nav-width: 180px;
+  --nav-width: 160px;
 }
 
 html {
@@ -212,6 +212,14 @@ body {
 .realm__content.visible {
   opacity: 1;
   transform: none;
+}
+
+/* ── Story card grid ──────────────────────────────── */
+.story-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 /* ── Story cards ──────────────────────────────────── */
